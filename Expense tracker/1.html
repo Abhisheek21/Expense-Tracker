@@ -1,0 +1,85 @@
+<!-- <html>
+  <head>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load("current", {packages:["corechart"]});
+      google.charts.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Task', 'Hours per Day'],
+          ['Salary',     11],
+          ['Rent',      7],
+          ['Entertainment',   3],
+          
+          
+        ]);
+
+        var options = {
+          title: 'My Daily Activities',
+          is3D: true,
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
+        chart.draw(data, options);
+      }
+    </script>
+  </head>
+  <body>
+    <div id="piechart_3d" style="width: 900px; height: 500px;"></div>
+  </body>
+</html> -->
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Dynamic Google Pie Chart</title>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load("current", { packages: ["corechart"] });
+      google.charts.setOnLoadCallback(drawChart);
+
+      var chart;
+      var data;
+
+      function drawChart() {
+        data = google.visualization.arrayToDataTable([
+          ['Task', 'Hours per Day'],
+          ['Salary', 11],
+          ['Rent', 7],
+          ['Entertainment', 3],
+        ]);
+
+        var options = {
+          title: 'My Daily Activities',
+          is3D: true,
+        };
+
+        chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
+        chart.draw(data, options);
+      }
+
+      function updateChart() {
+        var newData = [
+          ['Task', 'Hours per Day'],
+          ['Salary', parseInt(document.getElementById('salary').value)],
+          ['Rent', parseInt(document.getElementById('rent').value)],
+          ['Entertainment', parseInt(document.getElementById('entertainment').value)],
+        ];
+
+        data = google.visualization.arrayToDataTable(newData);
+        chart.draw(data, { title: 'My Daily Activities', is3D: true });
+      }
+    </script>
+  </head>
+  <body>
+    <div id="piechart_3d" style="width: 900px; height: 500px;"></div>
+    <div>
+      <label for="salary">Salary:</label>
+      <input type="number" id="salary" value="11">
+      <label for="rent">Rent:</label>
+      <input type="number" id="rent" value="7">
+      <label for="entertainment">Entertainment:</label>
+      <input type="number" id="entertainment" value="3">
+      <button onclick="updateChart()">Update Chart</button>
+    </div>
+  </body>
+</html>
